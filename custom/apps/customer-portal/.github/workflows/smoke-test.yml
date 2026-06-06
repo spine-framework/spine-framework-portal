@@ -1,0 +1,62 @@
+name: Post-Deploy Smoke Test
+
+on:
+  workflow_dispatch:
+  deployment_status:
+
+jobs:
+  smoke:
+    if: github.event_name == 'workflow_dispatch' || github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    env:
+      BASE_URL: ${{ secrets.SMOKE_TEST_URL }}
+      AUTH_TOKEN: ${{ secrets.SMOKE_TEST_TOKEN }}
+
+    steps:
+      - name: Check secrets
+        run: |
+          if [ -z "$BASE_URL" ] || [ -z "$AUTH_TOKEN" ]; then
+            echo "::error::SMOKE_TEST_URL and SMOKE_TEST_TOKEN secrets must be set"
+            exit 1
+          fi
+
+      - name: Smoke — Auth (GET /me)
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: Bearer $AUTH_TOKEN" \
+            -H "Content-Type: application/json" \
+            "$BASE_URL/.netlify/functions/me")
+          echo "GET /me → $STATUS"
+          [ "$STATUS" = "200" ] || exit 1
+
+      - name: Smoke — List Tickets (GET /tickets)
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: Bearer $AUTH_TOKEN" \
+            -H "Content-Type: application/json" \
+            "$BASE_URL/.netlify/functions/tickets")
+          echo "GET /tickets → $STATUS"
+          [ "$STATUS" = "200" ] || exit 1
+
+      - name: Smoke — List Workflows (GET /workflow-definitions)
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: Bearer $AUTH_TOKEN" \
+            -H "Content-Type: application/json" \
+            "$BASE_URL/.netlify/functions/workflow-definitions")
+          echo "GET /workflow-definitions → $STATUS"
+          [ "$STATUS" = "200" ] || exit 1
+
+      - name: Smoke — System Health (GET /system-health)
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: Bearer $AUTH_TOKEN" \
+            -H "Content-Type: application/json" \
+            "$BASE_URL/.netlify/functions/system-health")
+          echo "GET /system-health → $STATUS"
+          [ "$STATUS" = "200" ] || exit 1
+
+      - name: All smoke tests passed
+        run: echo "✅ All smoke tests passed"

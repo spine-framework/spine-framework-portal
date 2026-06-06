@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "description": "Spine v2 Core Platform Manifest",
+  "integrity": {
+    "src": "sha256-$(find src -type f -name '*.tsx' -o -name '*.ts' -o -name '*.css' | LC_ALL=C sort | xargs cat | sha256sum | cut -d' ' -f1)",
+    "functions": "sha256-$(find functions -type f -name '*.ts' | LC_ALL=C sort | xargs cat | sha256sum | cut -d' ' -f1)"
+  },
+  "lastModified": "2026-04-09T00:00:00Z",
+  "paths": {
+    "src": "./src",
+    "functions": "./functions",
+    "public": "./public"
+  },
+  "rules": {
+    "customPrefix": "custom_",
+    "readOnly": true,
+    "integrityCheck": true
+  }
+}
