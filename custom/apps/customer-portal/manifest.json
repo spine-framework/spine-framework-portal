@@ -1,0 +1,60 @@
+{
+  "name": "Customer Portal",
+  "slug": "customer-portal",
+  "description": "Self-service portal for customers to access tickets, knowledge base, courses, and community",
+  "version": "1.0.0",
+  "required_roles": ["member"],
+  "routes": [
+    "/portal",
+    "/portal/tickets",
+    "/portal/tickets/:id",
+    "/portal/kb",
+    "/portal/courses",
+    "/portal/community",
+    "/portal/marketplace"
+  ],
+  "nav_items": [
+    {
+      "title": "Home",
+      "path": "/portal",
+      "icon": "Home",
+      "order": 1
+    },
+    {
+      "title": "Tickets",
+      "path": "/portal/tickets",
+      "icon": "Ticket",
+      "order": 2
+    },
+    {
+      "title": "Knowledge Base",
+      "path": "/portal/kb",
+      "icon": "BookOpen",
+      "order": 3
+    },
+    {
+      "title": "Courses",
+      "path": "/portal/courses",
+      "icon": "GraduationCap",
+      "order": 4
+    },
+    {
+      "title": "Community",
+      "path": "/portal/community",
+      "icon": "Users",
+      "order": 5
+    },
+    {
+      "title": "Marketplace",
+      "path": "/portal/marketplace",
+      "icon": "Store",
+      "order": 6
+    }
+  ],
+  "features": ["tickets", "kb", "courses", "community", "marketplace"],
+  "dependencies": ["items", "threads", "messages"],
+  "entry_point": "./index.tsx",
+  "directories": ["pages", "components", "hooks", "config", "seed", "functions", "migrations", "tests"],
+  "is_public": true,
+  "auth_required": true
+}

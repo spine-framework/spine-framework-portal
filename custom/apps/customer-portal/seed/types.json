@@ -1,0 +1,213 @@
+[
+  {
+    "kind": "item",
+    "slug": "community_post",
+    "name": "Community Post",
+    "description": "Community discussion post with voting and accepted answers",
+    "icon": "message-circle",
+    "color": "#6366F1",
+    "ownership": "tenant",
+    "is_active": true,
+    "design_schema": {
+      "scope": "platform",
+      "views": {
+        "default_list": {
+          "type": "list",
+          "label": "Community Posts",
+          "fields": {
+            "title": { "sortable": true, "display_type": "text" },
+            "channel": { "sortable": true, "display_type": "badge" },
+            "moderation_status": { "sortable": true, "display_type": "badge" }
+          },
+          "display": "table"
+        },
+        "default_detail": {
+          "type": "detail",
+          "label": "Community Post",
+          "sections": [
+            { "title": "Content", "fields": ["title", "content", "channel", "context"] },
+            { "title": "Moderation", "fields": ["moderation_status", "helpful_count", "not_helpful_count", "accepted_answer_id"] }
+          ]
+        }
+      },
+      "fields": {
+        "title": { "label": "Title", "required": true, "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read", "write"] } },
+        "content": { "label": "Content", "required": true, "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read", "write"] } },
+        "context": { "label": "Context", "required": true, "data_type": "select", "options": [{"label":"Support","value":"support"},{"label":"Community","value":"community"}], "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read", "write"] } },
+        "channel": { "label": "Channel", "required": true, "data_type": "select", "default": "general", "options": [{"label":"General","value":"general"},{"label":"Announcements","value":"announcements"},{"label":"Help","value":"help"},{"label":"Show and Tell","value":"show-and-tell"}], "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read", "write"] } },
+        "moderation_status": { "label": "Moderation Status", "data_type": "select", "default": "pending", "options": [{"label":"Pending","value":"pending"},{"label":"Approved","value":"approved"},{"label":"Flagged","value":"flagged"}], "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "helpful_count": { "label": "Helpful Votes", "data_type": "number", "default": 0, "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "not_helpful_count": { "label": "Not Helpful Votes", "data_type": "number", "default": 0, "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "accepted_answer_id": { "label": "Accepted Answer", "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } }
+      },
+      "record_permissions": { "member": ["create", "read", "update"], "support": ["create", "read", "update"], "system_admin": ["create", "read", "update", "delete"] },
+      "functionality": null
+    },
+    "validation_schema": {}
+  },
+  {
+    "kind": "item",
+    "slug": "course_lesson",
+    "name": "Course Lesson",
+    "description": "Learning content unit — part of a course sequence",
+    "icon": "graduation-cap",
+    "color": "#F97316",
+    "ownership": "tenant",
+    "is_active": true,
+    "design_schema": {
+      "scope": "platform",
+      "views": {
+        "default_list": {
+          "type": "list",
+          "label": "Course Lessons",
+          "fields": {
+            "title": { "sortable": true, "display_type": "text" },
+            "sequence": { "sortable": true, "display_type": "number" },
+            "estimated_duration": { "sortable": true, "display_type": "number" }
+          },
+          "display": "table"
+        },
+        "default_detail": {
+          "type": "detail",
+          "label": "Course Lesson",
+          "sections": [
+            { "title": "Content", "fields": ["title", "content", "video_url", "estimated_duration"] },
+            { "title": "Settings", "fields": ["sequence", "progress_required", "prerequisites"] }
+          ]
+        }
+      },
+      "fields": {
+        "title": { "label": "Title", "required": true, "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "content": { "label": "Content", "required": true, "data_type": "textarea", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "context": { "label": "Context", "required": true, "data_type": "select", "options": [{"label":"Knowledge Base","value":"kb"},{"label":"Course","value":"course"}], "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "sequence": { "label": "Lesson Sequence", "data_type": "number", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "video_url": { "label": "Video URL", "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "estimated_duration": { "label": "Estimated Duration (minutes)", "data_type": "number", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "progress_required": { "label": "Progress Required", "data_type": "boolean", "default": true, "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "prerequisites": { "label": "Prerequisite Lessons", "data_type": "json", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } }
+      },
+      "record_permissions": { "member": ["read"], "support": ["read", "create", "update"], "system_admin": ["create", "read", "update", "delete"] },
+      "functionality": null
+    },
+    "validation_schema": {}
+  },
+  {
+    "kind": "item",
+    "slug": "integrity_report",
+    "name": "Integrity Report",
+    "description": "Spine core integrity check result from a customer deploy",
+    "icon": "shield-check",
+    "color": "#84CC16",
+    "ownership": "tenant",
+    "is_active": true,
+    "design_schema": {
+      "scope": "account",
+      "views": {
+        "default_list": {
+          "type": "list",
+          "label": "Integrity Reports",
+          "fields": {
+            "title": { "sortable": true, "display_type": "text" },
+            "is_active": { "sortable": true, "display_type": "badge" },
+            "created_at": { "sortable": true, "display_type": "timestamp" }
+          },
+          "display": "table"
+        },
+        "default_detail": {
+          "type": "detail",
+          "label": "Integrity Report",
+          "sections": [
+            { "title": "Hashes", "fields": ["core_hash", "manifest_hash", "deploy_id", "deploy_url"] },
+            { "title": "Metadata", "fields": ["is_active", "created_at", "updated_at"] }
+          ]
+        }
+      },
+      "fields": {
+        "title": { "label": "Title", "system": true, "required": true, "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "status": { "label": "Status", "system": true, "required": false, "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read"], "member": ["read"] } },
+        "is_active": { "label": "Active", "system": true, "required": true, "data_type": "boolean", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "core_hash": { "label": "Core Hash", "system": false, "required": true, "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read"], "member": ["read"] } },
+        "manifest_hash": { "label": "Manifest Hash", "system": false, "required": true, "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read"], "member": ["read"] } },
+        "deploy_id": { "label": "Deploy ID", "system": false, "required": false, "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read"], "member": ["read"] } },
+        "deploy_url": { "label": "Deploy URL", "system": false, "required": false, "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read"], "member": ["read"] } },
+        "created_at": { "label": "Created", "system": true, "readonly": true, "required": false, "data_type": "datetime", "permissions": { "system_admin": ["read"], "support": ["read"], "member": ["read"] } },
+        "updated_at": { "label": "Updated", "system": true, "readonly": true, "required": false, "data_type": "datetime", "permissions": { "system_admin": ["read"], "support": ["read"], "member": ["read"] } }
+      },
+      "record_permissions": { "member": ["read"], "support": ["read", "create", "update"], "system_admin": ["create", "read", "update", "delete"] },
+      "functionality": null
+    },
+    "validation_schema": {}
+  },
+  {
+    "kind": "item",
+    "slug": "support_ticket",
+    "name": "Support Ticket",
+    "description": "Customer support request with AI-first escalation chain",
+    "icon": "ticket",
+    "color": "#EF4444",
+    "ownership": "tenant",
+    "is_active": true,
+    "design_schema": {
+      "scope": "customer",
+      "views": {
+        "default_list": {
+          "type": "list",
+          "label": "Support Tickets",
+          "fields": {
+            "title": { "sortable": true, "display_type": "text" },
+            "status": { "sortable": true, "display_type": "badge" },
+            "priority": { "sortable": true, "display_type": "badge" },
+            "escalated": { "sortable": true, "display_type": "boolean" }
+          },
+          "display": "table"
+        },
+        "default_detail": {
+          "type": "detail",
+          "label": "Support Ticket",
+          "sections": [
+            { "title": "Request", "fields": ["title", "description", "status", "priority", "context"] },
+            { "title": "AI Handling", "fields": ["ai_response", "ai_confidence", "escalated", "aim_triage_agent_id", "aim_escalation_reason", "aim_human_assignee_id"] },
+            { "title": "Analysis", "fields": ["ca_true_problem", "ca_reported_issue", "ca_final_solution", "ca_solution_steps", "ca_customer_temperature", "ca_time_to_resolution", "ca_automation_potential"] },
+            { "title": "KB Generation", "fields": ["ca_kb_candidate", "kb_proposed_kb_id", "kb_redacted_draft", "kb_approved_at", "kb_approved_by", "kb_human_edits"] }
+          ]
+        }
+      },
+      "fields": {
+        "title": { "label": "Title", "system": true, "required": true, "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read", "write"] } },
+        "description": { "label": "Description", "system": true, "required": true, "data_type": "textarea", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read", "write"] } },
+        "status": { "label": "Status", "system": true, "data_type": "select", "default": "open", "options": [{"label":"Open","value":"open"},{"label":"AI Responding","value":"ai_responding"},{"label":"Human Assigned","value":"human_assigned"},{"label":"In Progress","value":"in_progress"},{"label":"Resolved","value":"resolved"},{"label":"Closed","value":"closed"}], "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "context": { "label": "Context", "required": true, "data_type": "select", "options": [{"label":"Support","value":"support"},{"label":"Community","value":"community"}], "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read", "write"] } },
+        "priority": { "label": "Priority", "data_type": "select", "default": "medium", "options": [{"label":"Low","value":"low"},{"label":"Medium","value":"medium"},{"label":"High","value":"high"},{"label":"Urgent","value":"urgent"}], "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "escalated": { "label": "Escalated to Human", "data_type": "boolean", "default": false, "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ai_response": { "label": "AI Response", "data_type": "textarea", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ai_confidence": { "label": "AI Confidence", "data_type": "number", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "aim_triage_agent_id": { "label": "Triage Agent ID", "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "aim_escalation_reason": { "label": "Escalation Reason", "data_type": "select", "options": [{"label":"Low Confidence","value":"low_confidence"},{"label":"Thumbs Down","value":"thumbs_down"},{"label":"Customer Request","value":"customer_request"},{"label":"None","value":"none"}], "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "aim_human_assignee_id": { "label": "Human Assignee", "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "aim_confidence_threshold": { "label": "Confidence Threshold", "data_type": "number", "default": 0.75, "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "aim_confidence_at_response": { "label": "Confidence at Response", "data_type": "number", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ca_true_problem": { "label": "True Problem Identified", "data_type": "textarea", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ca_reported_issue": { "label": "Reported Issue", "data_type": "textarea", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ca_final_solution": { "label": "Final Solution Summary", "data_type": "textarea", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ca_solution_steps": { "label": "Steps to Solve", "data_type": "json", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ca_diagnostic_steps": { "label": "Steps to Diagnose", "data_type": "json", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ca_analysis_tags": { "label": "Analysis Tags", "data_type": "json", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ca_escalation_required": { "label": "Was Escalated to Human Agent", "data_type": "boolean", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ca_customer_temperature": { "label": "Customer Temperature", "data_type": "select", "options": [{"label":"Positive","value":"positive"},{"label":"Neutral","value":"neutral"},{"label":"Negative","value":"negative"},{"label":"Frustrated","value":"frustrated"}], "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ca_time_to_resolution": { "label": "Time to Resolution (minutes)", "data_type": "number", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ca_back_and_forth_count": { "label": "Number of Back and Forths", "data_type": "number", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ca_automation_potential": { "label": "Automation Potential", "data_type": "select", "options": [{"label":"High","value":"high"},{"label":"Medium","value":"medium"},{"label":"Low","value":"low"}], "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ca_sentiment_progression": { "label": "Customer Sentiment Progression", "data_type": "json", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "ca_kb_candidate": { "label": "KB Candidate", "data_type": "boolean", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "kb_proposed_kb_id": { "label": "Proposed KB Article ID", "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "kb_redacted_draft": { "label": "Redacted Draft", "data_type": "textarea", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } },
+        "kb_approved_at": { "label": "Approved At", "data_type": "datetime", "permissions": { "system_admin": ["read", "write"], "support": ["read"], "member": ["read"] } },
+        "kb_approved_by": { "label": "Approved By", "data_type": "text", "permissions": { "system_admin": ["read", "write"], "support": ["read"], "member": ["read"] } },
+        "kb_human_edits": { "label": "Human Edits", "data_type": "textarea", "permissions": { "system_admin": ["read", "write"], "support": ["read", "write"], "member": ["read"] } }
+      },
+      "record_permissions": { "member": ["create", "read", "update"], "support": ["create", "read", "update"], "system_admin": ["create", "read", "update", "delete"] },
+      "functionality": null
+    },
+    "validation_schema": {}
+  }
+]

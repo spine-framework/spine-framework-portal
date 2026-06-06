@@ -1,0 +1,11 @@
+[
+  {
+    "slug": "member",
+    "name": "Member",
+    "description": "Portal member with standard access",
+    "permissions": ["*"],
+    "is_system": true,
+    "is_active": true,
+    "is_protected": false
+  }
+]

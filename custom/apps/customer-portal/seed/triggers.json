@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Community: Unanswered to Ticket",
+    "description": "Check for community posts >24h without answers and escalate to support tickets",
+    "trigger_type": "cron",
+    "event_type": null,
+    "config": {
+      "scope": "account",
+      "function": "custom_portal-community-escalation.checkUnanswered",
+      "schedule": "0 */4 * * *",
+      "timezone": "UTC",
+      "description": "Check for community posts >24h without answers, create tickets"
+    },
+    "ownership": "tenant",
+    "is_system": false,
+    "is_active": true
+  }
+]
