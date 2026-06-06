@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "lib": ["ES2022"],
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "include": [
+    "cli/**/*",
+    "functions/_shared/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "src"
+  ]
+}

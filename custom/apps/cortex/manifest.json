@@ -1,0 +1,82 @@
+{
+  "name": "Cortex",
+  "slug": "cortex",
+  "description": "Unified workspace for CRM, Support, Community, and Knowledge Base",
+  "version": "1.0.0",
+  "required_roles": ["member"],
+  "routes": [
+    "/cortex",
+    "/cortex/dashboard",
+    "/cortex/crm",
+    "/cortex/crm/accounts",
+    "/cortex/crm/accounts/:id",
+    "/cortex/crm/contacts",
+    "/cortex/crm/deals",
+    "/cortex/crm/deals/:id",
+    "/cortex/crm/health",
+    "/cortex/crm/activity",
+    "/cortex/support",
+    "/cortex/support/:id",
+    "/cortex/community",
+    "/cortex/kb",
+    "/cortex/kb/editor",
+    "/cortex/kb/ingestion",
+    "/cortex/courses",
+    "/cortex/intelligence"
+  ],
+  "nav_items": [
+    {
+      "title": "Dashboard",
+      "path": "/cortex/dashboard",
+      "icon": "LayoutDashboard",
+      "order": 1
+    },
+    {
+      "title": "CRM",
+      "path": "/cortex/crm",
+      "icon": "Users",
+      "order": 2,
+      "children": [
+        { "title": "Accounts", "path": "/cortex/crm/accounts" },
+        { "title": "Contacts", "path": "/cortex/crm/contacts" },
+        { "title": "Deals", "path": "/cortex/crm/deals" },
+        { "title": "Health", "path": "/cortex/crm/health" },
+        { "title": "Activity", "path": "/cortex/crm/activity" }
+      ]
+    },
+    {
+      "title": "Support",
+      "path": "/cortex/support",
+      "icon": "Headphones",
+      "order": 3
+    },
+    {
+      "title": "Community",
+      "path": "/cortex/community",
+      "icon": "Users",
+      "order": 4
+    },
+    {
+      "title": "Knowledge Base",
+      "path": "/cortex/kb",
+      "icon": "BookOpen",
+      "order": 5
+    },
+    {
+      "title": "Courses",
+      "path": "/cortex/courses",
+      "icon": "GraduationCap",
+      "order": 6
+    },
+    {
+      "title": "Intelligence",
+      "path": "/cortex/intelligence",
+      "icon": "Brain",
+      "order": 7
+    }
+  ],
+  "features": ["crm", "support", "community", "kb", "courses", "intelligence"],
+  "dependencies": ["items", "accounts", "pipelines", "integrations"],
+  "entry_point": "./index.tsx",
+  "sidebar_component": "./components/CortexSidebar.tsx"
+}
