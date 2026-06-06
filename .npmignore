@@ -1,0 +1,44 @@
+# Only include the Customer Portal app and necessary files
+# Exclude everything else from the subtree
+
+# Include only what we need
+!custom/apps/customer-portal/
+!LICENSE.md
+!README.md
+!package.json
+!DEPLOYMENT.md
+!SUBTREE_UPDATES.md
+
+# Exclude everything else
+*
+!custom/apps/customer-portal/
+!LICENSE.md
+!README.md
+!package.json
+!DEPLOYMENT.md
+!SUBTREE_UPDATES.md
+
+# Exclude additional files from the subtree that shouldn't be in the package
+custom/apps/customer-portal/.git*
+custom/apps/customer-portal/node_modules/
+custom/apps/customer-portal/dist/
+custom/apps/customer-portal/build/
+custom/apps/customer-portal/.DS_Store
+custom/apps/customer-portal/yarn.lock
+custom/apps/customer-portal/package-lock.json
+
+# Exclude test files
+custom/apps/customer-portal/**/*.test.ts
+custom/apps/customer-portal/**/*.test.tsx
+custom/apps/customer-portal/**/*.spec.ts
+custom/apps/customer-portal/**/*.spec.tsx
+
+# Exclude development files
+custom/apps/customer-portal/scripts/
+custom/apps/customer-portal/vitest.config.ts
+custom/apps/customer-portal/netlify.toml
+custom/apps/customer-portal/STRUCTURE.md
+
+# Exclude docs (keep only configuration docs)
+custom/apps/customer-portal/docs/
+!custom/apps/customer-portal/docs/configuration.md
